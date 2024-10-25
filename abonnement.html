@@ -87,9 +87,11 @@
     </style>
 </head>
 <body>
-    <div class="container">
+     <div class="container">
         <h1 id="statut"></h1>
         <p id="client"></p>
+        <p id="date-abonnement"></p>
+        <p id="date-expiration"></p>
         <div class="message">Merci pour votre fidélité !</div>
         <div class="remerciement">Nous apprécions votre confiance.</div>
     </div>
@@ -100,15 +102,19 @@
             return {
                 nom: params.get('nom') || 'Inconnu',
                 prenom: params.get('prenom') || 'Inconnu',
-                statut: params.get('statut') || 'Inconnu'
+                statut: params.get('statut') || 'Inconnu',
+                date_abonnement: params.get('date_abonnement') || 'Inconnu',
+                date_expiration: params.get('date_expiration') || 'Inconnu'
             };
         }
 
         // Mettre à jour le contenu de la page avec les paramètres récupérés
         function updateContent() {
-            const { nom, prenom, statut } = getQueryParams();
+            const { nom, prenom, statut, date_abonnement, date_expiration } = getQueryParams();
             document.getElementById('client').innerText = `Client: ${nom} ${prenom}`;
             document.getElementById('statut').innerText = `Statut: ${statut}`;
+            document.getElementById('date-abonnement').innerText = `Date d'abonnement: ${date_abonnement}`;
+            document.getElementById('date-expiration').innerText = `Date d'expiration: ${date_expiration}`;
             document.getElementById('statut').className = statut === 'Valide' ? 'statut-valide' : 'statut-invalide';
         }
 
