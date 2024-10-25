@@ -88,10 +88,32 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="statut-valide">Statut : Valide</h1>
-        <p>Client : Jean Dupont</p>
+        <h1 id="statut"></h1>
+        <p id="client"></p>
         <div class="message">Merci pour votre fidélité !</div>
         <div class="remerciement">Nous apprécions votre confiance.</div>
     </div>
+    <script>
+        // Fonction pour obtenir les paramètres de l'URL
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                nom: params.get('nom') || 'Inconnu',
+                prenom: params.get('prenom') || 'Inconnu',
+                statut: params.get('statut') || 'Inconnu'
+            };
+        }
+
+        // Mettre à jour le contenu de la page avec les paramètres récupérés
+        function updateContent() {
+            const { nom, prenom, statut } = getQueryParams();
+            document.getElementById('client').innerText = `Client: ${nom} ${prenom}`;
+            document.getElementById('statut').innerText = `Statut: ${statut}`;
+            document.getElementById('statut').className = statut === 'Valide' ? 'statut-valide' : 'statut-invalide';
+        }
+
+        // Appeler la fonction pour mettre à jour le contenu
+        updateContent();
+    </script>
 </body>
 </html>
